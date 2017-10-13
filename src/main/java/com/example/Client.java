@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *
@@ -17,15 +19,41 @@ import java.net.URL;
 public class Client {
     
     public static void main(String[] args) throws Exception { 
-        URL google = new URL("http://www.google.com/"); 
-        try (BufferedReader reader = new BufferedReader(
-            new InputStreamReader(google.openStream()))) { 
-              String inputLine = null; 
-              while ((inputLine = reader.readLine()) != null) { 
+        String direccionHeroku = "https://vast-chamber-72895.herokuapp.com";
+        URL google = new URL(direccionHeroku+"/db"); 
+            try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(google.openStream()))) { 
+                String inputLine = null; 
+                while ((inputLine = reader.readLine()) != null) { 
                     System.out.println(inputLine); 
-               } 
-         } catch (IOException x) { 
-                 System.err.println(x); 
-         } 
+                } 
+            } catch (IOException x) { 
+                System.err.println(x); 
+            } 
+        
+            google = new URL(direccionHeroku+"/index");
+            try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(google.openStream()))) { 
+                String inputLine = null; 
+                while ((inputLine = reader.readLine()) != null) { 
+                    System.out.println(inputLine); 
+                } 
+           } catch (IOException x) { 
+                System.err.println(x); 
+           }
+ 
+        
+        for(int i=1; i<=20; i++){
+            google = new URL(direccionHeroku+"/cuadrado/"+i); 
+            try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(google.openStream()))) { 
+                String inputLine = null; 
+                while ((inputLine = reader.readLine()) != null) { 
+                    System.out.println(inputLine); 
+                } 
+                } catch (IOException x) { 
+                        System.err.println(x); 
+                } 
+        }
     } 
 }

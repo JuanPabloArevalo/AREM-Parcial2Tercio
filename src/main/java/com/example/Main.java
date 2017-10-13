@@ -58,15 +58,13 @@ public class Main {
   
   @RequestMapping("/cuadrado/{numero}")
   String cuadrado(Map<String, Object> model, @PathVariable("numero") double numero) {
-     
-        Clase clase = new Clase();
-        clase.setValor(numero);
         double cuadrado=numero*numero;
         ArrayList<String> output = new ArrayList<String>();
         output.add("{valor : "+numero+" , cuadrado : "+cuadrado+" }");
         model.put("records", output);
         return "cuadrado";
   }
+  
 
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
