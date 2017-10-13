@@ -33,6 +33,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @SpringBootApplication
@@ -51,6 +54,18 @@ public class Main {
   @RequestMapping("/")
   String index() {
     return "index";
+  }
+  
+  @RequestMapping("/cuadrado/{numero}")
+  String cuadrado(Map<String, Object> model, @PathVariable("numero") double numero) {
+     
+        Clase clase = new Clase();
+        clase.setValor(numero);
+        double cuadrado=numero*numero;
+        ArrayList<String> output = new ArrayList<String>();
+        output.add("{valor : "+numero+" , cuadrado : "+cuadrado+" }");
+        model.put("records", output);
+        return "cuadrado";
   }
 
   @RequestMapping("/db")

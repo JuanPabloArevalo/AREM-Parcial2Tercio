@@ -2,7 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'index')}">
 
 <body>
-    <h1>
+<div class="container">
+  <ul th:each="record : ${records}">
+  <li th:text="${record}"/>
+  </ul>
+</div>
 
 </body>
 </html>
